@@ -1,5 +1,6 @@
 package com.ckws.portfolioservice.controller;
 
+import com.ckws.portfolioservice.common.ApiResponse;
 import com.ckws.portfolioservice.dto.ExperienceResponseDto;
 import com.ckws.portfolioservice.service.ExperienceService;
 import lombok.RequiredArgsConstructor;
@@ -18,13 +19,13 @@ public class ExperienceController {
     private final ExperienceService service;
 
     @GetMapping
-    public List<ExperienceResponseDto> list() {
+    public ApiResponse<List<ExperienceResponseDto>> list() {
         Long profileId = 1L;
-        return service.listByProfileId(profileId);
+        return ApiResponse.ok(service.listByProfileId(profileId));
     }
 
     @GetMapping("/{id}")
-    public ExperienceResponseDto getOne(@PathVariable Long id) {
-        return service.getOne(id);
+    public ApiResponse<ExperienceResponseDto> getOne(@PathVariable Long id) {
+        return ApiResponse.ok(service.getOne(id));
     }
 }

@@ -1,5 +1,6 @@
 package com.ckws.portfolioservice.controller;
 
+import com.ckws.portfolioservice.common.ApiResponse;
 import com.ckws.portfolioservice.dto.ProjectResponseDto;
 import com.ckws.portfolioservice.service.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -14,18 +15,16 @@ import java.util.List;
 @RequestMapping("/api/projects")
 @RequiredArgsConstructor
 public class ProjectController {
-
     private final ProjectService service;
 
-    // For now, default to profileId = 1
     @GetMapping
-    public List<ProjectResponseDto> list() {
+    public ApiResponse<List<ProjectResponseDto>> list() {
         Long profileId = 1L;
-        return service.listByProfileId(profileId);
+        return ApiResponse.ok(service.listByProfileId(profileId));
     }
 
     @GetMapping("/{id}")
-    public ProjectResponseDto getOne(@PathVariable Long id) {
-        return service.getOne(id);
+    public ApiResponse<ProjectResponseDto> getOne(@PathVariable Long id) {
+        return ApiResponse.ok(service.getOne(id));
     }
 }

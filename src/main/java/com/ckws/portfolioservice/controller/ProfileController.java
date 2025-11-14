@@ -1,5 +1,6 @@
 package com.ckws.portfolioservice.controller;
 
+import com.ckws.portfolioservice.common.ApiResponse;
 import com.ckws.portfolioservice.dto.ProfileResponseDto;
 import com.ckws.portfolioservice.service.ProfileService;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +16,12 @@ public class ProfileController {
     private final ProfileService service;
 
     @GetMapping
-    public ProfileResponseDto getDefault() {
-        return service.getDefaultProfile();
+    public ApiResponse<ProfileResponseDto> getDefault() {
+        return ApiResponse.ok(service.getDefaultProfile());
     }
 
     @GetMapping("/{id}")
-    public ProfileResponseDto getById(@PathVariable Long id) {
-        return service.getById(id);
+    public ApiResponse<ProfileResponseDto> getById(@PathVariable Long id) {
+        return ApiResponse.ok(service.getById(id));
     }
 }

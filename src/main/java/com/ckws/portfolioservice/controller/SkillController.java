@@ -1,5 +1,6 @@
 package com.ckws.portfolioservice.controller;
 
+import com.ckws.portfolioservice.common.ApiResponse;
 import com.ckws.portfolioservice.dto.SkillResponseDto;
 import com.ckws.portfolioservice.service.SkillService;
 import lombok.RequiredArgsConstructor;
@@ -14,18 +15,16 @@ import java.util.List;
 @RequestMapping("/api/skills")
 @RequiredArgsConstructor
 public class SkillController {
-
     private final SkillService service;
 
-    // Default: profile 1
     @GetMapping
-    public List<SkillResponseDto> list() {
+    public ApiResponse<List<SkillResponseDto>> list() {
         Long profileId = 1L;
-        return service.listByProfileId(profileId);
+        return ApiResponse.ok(service.listByProfileId(profileId));
     }
 
     @GetMapping("/{id}")
-    public SkillResponseDto getOne(@PathVariable Long id) {
-        return service.getOne(id);
+    public ApiResponse<SkillResponseDto> getOne(@PathVariable Long id) {
+        return ApiResponse.ok(service.getOne(id));
     }
 }
